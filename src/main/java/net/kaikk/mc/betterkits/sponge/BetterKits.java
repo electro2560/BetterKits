@@ -17,6 +17,7 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.GameReloadEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -135,6 +136,11 @@ public class BetterKits {
 	
 	@Listener
 	public void onServerStart(GameStartedServerEvent event) throws Exception {
+		this.load();
+	}
+	
+	@Listener
+	public void onPluginReload(GameReloadEvent event) throws Exception {
 		this.load();
 	}
 	
