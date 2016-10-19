@@ -1,0 +1,45 @@
+name: ${project.artifactId}
+main: ${package}.bukkit.${project.artifactId}
+version: ${project.version}
+author: ${developer}
+
+commands:
+   kit:
+      aliases: [bkit, getkit]
+   kits:
+      aliases: [bkits, kitlist]
+   kitpreview:
+      aliases: [kitp, bkitp]
+   kitgive:
+   kitcreate:
+   kitdelete:
+   kitedit:
+   kitclearcache:
+   kitreload:
+
+permissions:
+    betterkits.list:
+        default: true
+    betterkits.preview:
+        default: true
+    betterkits.create:
+        default: op
+    betterkits.give:
+        default: op
+    betterkits.listall:
+        default: op
+    betterkits.delete:
+        default: op
+    betterkits.edit:
+        default: op
+    betterkits.clearcache:
+        default: op
+    betterkits.reload:
+        default: op
+    betterkits.allkits:
+        default: false
+    betterkits.bypasscooldown.allkits:
+        default: false
+
+    # betterkits.kit.[kitname]
+    # betterkits.bypasscooldown.kit.[kitname]

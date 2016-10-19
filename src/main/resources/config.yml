@@ -1,0 +1,5 @@
+AllowedChests:
+- CHEST
+- TRAPPED_CHEST
+
+KitTitleFormat: "&4%name"
