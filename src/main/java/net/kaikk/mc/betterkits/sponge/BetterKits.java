@@ -43,7 +43,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 
-@Plugin(id="betterkits", name = "BetterKits", version = "0.9", description = "")
+@Plugin(id=PluginInfo.id, name = PluginInfo.name, version = PluginInfo.version, description = PluginInfo.description)
 public class BetterKits {
 	private static BetterKits instance;
 	private Config config;
@@ -54,7 +54,6 @@ public class BetterKits {
 	@Inject
 	@DefaultConfig(sharedRoot = false)
 	private ConfigurationLoader<CommentedConfigurationNode> configManager;
-	public boolean scheduledRestart;
 	
 	@Inject
 	@ConfigDir(sharedRoot = false)
