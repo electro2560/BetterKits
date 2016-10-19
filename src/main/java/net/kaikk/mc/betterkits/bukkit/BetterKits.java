@@ -14,10 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
-/* TODO
- * /kitinfo command?
- * preventing duplicate kits creation? 
- * */
+
 public class BetterKits extends JavaPlugin {
 	private static BetterKits instance;
 	private Config config;
@@ -35,7 +32,7 @@ public class BetterKits extends JavaPlugin {
 		this.loadData();
 		Messages.load(this, "messages.yml");
 		
-		this.getServer().getPluginManager().registerEvents(new EventListener(), this);
+		this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
 		
 		// commands executor
 		CommandExec ce = new CommandExec(this);

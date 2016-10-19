@@ -70,7 +70,7 @@ public class BetterKits {
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(PlayerData.class), new PlayerDataSerializer());
 		
 		// Register listener
-		Sponge.getEventManager().registerListeners(this, new EventListener());
+		Sponge.getEventManager().registerListeners(this, new EventListener(this));
 		
 		// Register command
 		Sponge.getCommandManager().register(this, 

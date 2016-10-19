@@ -15,6 +15,8 @@ import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
 public class Config {
 	public Set<BlockType> allowedChests = new HashSet<BlockType>();
+	public String starterKitName;
+	
 	public Config(BetterKits instance) throws Exception {
 		//load defaults
 		URL defaultsInJarURL = new URL("jar:file:/"+Sponge.getPluginManager().fromInstance(instance).get().getSource().get()+"!/config.yml");
@@ -35,6 +37,7 @@ public class Config {
 			}
 		}
 		
+		starterKitName = rootNode.getNode("StarterKit").getString("starter");
 	}
 }
 

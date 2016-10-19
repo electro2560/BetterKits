@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Config {
 	public Set<Material> allowedChests = new HashSet<Material>();
-	public String kitTitleFormat;
+	public String kitTitleFormat, starterKitName;
 	
 	public Config(JavaPlugin instance) {
 		instance.saveDefaultConfig();
@@ -24,5 +24,6 @@ public class Config {
 		}
 		
 		kitTitleFormat = instance.getConfig().getString("KitTitleFormat", "&4%name");
+		starterKitName = instance.getConfig().getString("StarterKit", "starter");
 	}
 }
