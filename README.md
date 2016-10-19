@@ -1,5 +1,5 @@
 ###BetterKits
-BetterKits is a kit plugin compatible for Bukkit and Sponge.
+BetterKits is a kit plugin compatible with Bukkit and Sponge servers.
 
 ####Major features
 - Supports item NBT data (for modded items like bags!)
@@ -30,7 +30,7 @@ BetterKits is a kit plugin compatible for Bukkit and Sponge.
 - Place a chest and fill it with the content of the kit you wish to create.
 - While looking at the chest within 4 blocks without any other block between you and the chest, use "/kitcreate (KitName)".
 - You can make more kits by placing a new chest and repeating the previous instructions.
-- WARNING: do not remove the chests you made for the kits! Those are used to read the kits items content! You also have to be sure they're are inaccesible to players, or they may steal from those chests!
+- WARNING: do not remove the chests you made for the kits! Those are used to read the kits items content! You also have to be sure they are inaccesible to players, or players may steal from them!
 
 #####Further details
 Kits are stored into chests in the world so NBT data is preserved and kits can be modified easily.
