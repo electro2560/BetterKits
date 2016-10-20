@@ -38,12 +38,11 @@ public class GiveCommand implements CommandExecutor {
 		
 		final int amount = args.<Integer>getOne("amount").isPresent() ? args.<Integer>getOne("amount").get() : 1;
 		
-		final Integer current = pd.getPendingKits().get(kit.getName());
+		Integer current = pd.getPendingKits().get(kit.getName());
 		if (current == null) {
-			pd.getPendingKits().put(kit.getName(), amount);
-		} else {
-			pd.getPendingKits().put(kit.getName(), amount+current);
+			current = 0;
 		}
+		pd.getPendingKits().put(kit.getName(), amount+current);
 		
 		try {
 			instance.saveData();

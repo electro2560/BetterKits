@@ -110,10 +110,10 @@ public class CommandExec implements CommandExecutor {
 		
 		Integer current = pd.getPendingKits().get(kit.getName());
 		if (current == null) {
-			pd.getPendingKits().put(kit.getName(), amount);
-		} else {
-			pd.getPendingKits().put(kit.getName(), amount+current);
+			current = 0;
 		}
+		pd.getPendingKits().put(kit.getName(), amount+current);
+		
 		instance.saveData();
 		sender.sendMessage(Messages.get("PlayerHasNow",
 				"name", oPlayer.getName(),
