@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -84,5 +86,65 @@ public class CommonUtils {
 	
 	public static InputStream getResourceAsStream(String resourcePath) {
 		return CommonUtils.class.getResourceAsStream(resourcePath);
+	}
+
+	public static String timeToString(int time) {
+		List<String> strs = new ArrayList<String>();
+
+		if (time<0) {
+			time*=-1;
+		}
+
+		// seconds
+		int secs = time % 60;
+		if (secs!=0||time==0) {
+			strs.add(secs+" second"+(secs!=1?"s":""));
+		}
+		if (time<60) {
+			return mergeTimeStrings(strs);
+		}
+
+		// minutes
+		int tmins = (time-secs) / 60;
+		int mins = tmins % 60;
+		if (mins!=0) {
+			strs.add(mins+" minute"+(mins!=1?"s":""));
+		}
+		if (tmins<60) {
+			return mergeTimeStrings(strs);
+		}
+
+		// hours
+		int thours = (tmins-mins) / 60;
+		int hours = thours % 24;
+		if (hours!=0) {
+			strs.add(hours+" hour"+(hours!=1?"s":""));
+		}
+		if (thours<24) {
+			return mergeTimeStrings(strs);
+		}
+
+		// days
+		int tdays = (thours-hours) / 24;
+		if (tdays!=0) {
+			strs.add(tdays+" day"+(tdays!=1?"s":""));
+		}
+
+		return mergeTimeStrings(strs);
+	}
+
+	private static String mergeTimeStrings(List<String> strs) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = strs.size()-1; i >=0; i--) {
+			sb.append(strs.get(i));
+			sb.append(' ');
+		}
+		
+		int lastChar = sb.length()-1;
+		if (lastChar>=0) {
+			sb.deleteCharAt(lastChar);
+		}
+		
+		return sb.toString();
 	}
 }

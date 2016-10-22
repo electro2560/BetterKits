@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -181,7 +180,7 @@ public class CommandExec implements CommandExecutor {
 		
 		Integer time = pd.getCooldownKits().get(lcName);
 		if (time != null && CommonUtils.epoch() - time < kit.getCooldown() && !player.hasPermission("betterkits.bypasscooldown.allkits") && !player.hasPermission("betterkits.bypasscooldown.kit."+lcName)) {
-			player.sendMessage(Messages.get("WaitKitCooldown", "remaining", DurationFormatUtils.formatDurationWords((kit.getCooldown() - (CommonUtils.epoch() - time)) * 1000L, true, true), "total", DurationFormatUtils.formatDurationWords(kit.getCooldown() * 1000L, true, true)));
+			player.sendMessage(Messages.get("WaitKitCooldown", "remaining", CommonUtils.timeToString(kit.getCooldown() - (CommonUtils.epoch() - time)), "total", CommonUtils.timeToString(kit.getCooldown())));
 			return false;
 		}
 		
