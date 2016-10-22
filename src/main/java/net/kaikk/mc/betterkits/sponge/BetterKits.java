@@ -19,7 +19,6 @@ import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.GameReloadEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 
@@ -69,6 +68,8 @@ public class BetterKits {
 		
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Kit.class), new KitSerializer());
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(PlayerData.class), new PlayerDataSerializer());
+		
+		this.load();
 		
 		// Register listener
 		Sponge.getEventManager().registerListeners(this, new EventListener(this));
@@ -132,11 +133,6 @@ public class BetterKits {
 				.permission("betterkits.reload")
 				.description(Text.of("ReloadCommand"))
 				.executor(new ReloadCommand(this)).build(), "kitreload");
-	}
-	
-	@Listener
-	public void onServerStart(GameStartedServerEvent event) throws Exception {
-		this.load();
 	}
 	
 	@Listener
