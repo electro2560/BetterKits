@@ -10,6 +10,7 @@ import org.spongepowered.api.block.BlockType;
 
 import com.google.common.reflect.TypeToken;
 
+import net.kaikk.mc.betterkits.common.CommonUtils;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
@@ -19,7 +20,7 @@ public class Config {
 	
 	public Config(BetterKits instance) throws Exception {
 		//load defaults
-		URL defaultsInJarURL = new URL("jar:file:/"+Sponge.getPluginManager().fromInstance(instance).get().getSource().get()+"!/config.yml");
+		URL defaultsInJarURL = CommonUtils.class.getResource("config.yml");
 		YAMLConfigurationLoader defaultsLoader = YAMLConfigurationLoader.builder().setURL(defaultsInJarURL).build();
 		ConfigurationNode defaults = defaultsLoader.load();
 

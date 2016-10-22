@@ -6,25 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
+import net.kaikk.mc.betterkits.common.CommonUtils;
 import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
 public class Messages {
 	private static Map<String, String> messages = new HashMap<String, String>();
 	
-	public static void load(BetterKits instance, String fileName) {
+	public static void load(BetterKits instance) {
 		//load defaults
 		try {
-			URL defaultsInJarURL = new URL("jar:file:/"+Sponge.getPluginManager().fromInstance(instance).get().getSource().get()+"!/"+fileName);
+			URL defaultsInJarURL = CommonUtils.class.getResource("messages.yml");
 			YAMLConfigurationLoader defaultsLoader = YAMLConfigurationLoader.builder().setURL(defaultsInJarURL).build();
 			ConfigurationNode defaults = defaultsLoader.load();
 			
-			YAMLConfigurationLoader loader = YAMLConfigurationLoader.builder().setPath(instance.getConfigDir().resolve(fileName)).build();
+			HoconConfigurationLoader loader = HoconConfigurationLoader.builder().setPath(instance.getConfigDir().resolve("messages.conf")).build();
 			ConfigurationNode root = loader.load();
 			root.mergeValuesFrom(defaults);
 			loader.save(root);

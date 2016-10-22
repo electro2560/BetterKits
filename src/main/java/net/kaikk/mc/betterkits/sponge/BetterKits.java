@@ -143,7 +143,7 @@ public class BetterKits {
 	public void load() throws Exception {
 		this.config = new Config(this);
 		
-		Messages.load(this, "messages.yml");
+		Messages.load(this);
 		this.loadData();
 	}
 

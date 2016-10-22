@@ -1,5 +1,10 @@
 package net.kaikk.mc.betterkits.common;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -68,5 +73,16 @@ public class CommonUtils {
 			sb.append(" <- ");
 		}
 		return sb.toString();
+	}	
+	
+	public static void extractResource(String resourcePath, File destination, boolean replace) throws IOException {
+		if (replace || !destination.exists()) {
+			destination.mkdirs();
+			Files.copy(getResourceAsStream(resourcePath), destination.getAbsoluteFile().toPath(), StandardCopyOption.REPLACE_EXISTING);
+		}
+	}
+	
+	public static InputStream getResourceAsStream(String resourcePath) {
+		return CommonUtils.class.getResourceAsStream(resourcePath);
 	}
 }

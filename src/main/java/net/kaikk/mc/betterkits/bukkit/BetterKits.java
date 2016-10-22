@@ -30,7 +30,7 @@ public class BetterKits extends JavaPlugin {
 
 		config = new Config(instance);
 		this.loadData();
-		Messages.load(this, "messages.yml");
+		Messages.load(this);
 		
 		this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
 		
