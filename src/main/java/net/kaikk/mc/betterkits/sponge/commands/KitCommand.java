@@ -1,11 +1,16 @@
 package net.kaikk.mc.betterkits.sponge.commands;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.entity.PlayerInventory;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -14,9 +19,12 @@ import net.kaikk.mc.betterkits.sponge.BetterKits;
 import net.kaikk.mc.betterkits.sponge.Kit;
 import net.kaikk.mc.betterkits.sponge.Messages;
 import net.kaikk.mc.betterkits.sponge.PlayerData;
+import net.kaikk.mc.betterkits.sponge.Utils;
 
 public class KitCommand implements CommandExecutor {
 	private BetterKits instance;
+	private Set<UUID> alertedPlayers = new HashSet<UUID>();
+	
 	public KitCommand(BetterKits instance) {
 		this.instance = instance;
 	}
@@ -50,6 +58,13 @@ public class KitCommand implements CommandExecutor {
 		Integer time = pd.getCooldownKits().get(lcName);
 		if (time != null && CommonUtils.epoch() - time < kit.getCooldown() && !player.hasPermission("betterkits.bypasscooldown.allkits") && !player.hasPermission("betterkits.bypasscooldown.kit."+lcName)) {
 			player.sendMessage(Messages.get("WaitKitCooldown", "remaining", CommonUtils.timeToString(kit.getCooldown() - (CommonUtils.epoch() - time)), "total", CommonUtils.timeToString(kit.getCooldown())));
+			return CommandResult.empty();
+		}
+		
+		int freeSlots = Utils.freeSlots(((PlayerInventory) player.getInventory().query(PlayerInventory.class)).getMain().slots());
+		int kitSlots = Utils.usedSlots(kit.getChestInventory().slots());
+		if (freeSlots < kitSlots && !this.alertedPlayers.add(player.getUniqueId())) {
+			player.sendMessage(Messages.get("KitItemsDropWarning", "kitname", kit.getName(), "kitslots", kitSlots+"", "freeslots", freeSlots+""));
 			return CommandResult.empty();
 		}
 		

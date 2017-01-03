@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
@@ -70,5 +71,15 @@ public class Utils {
 		}
 
 		return result;
+	}
+	
+	public static int freeSlots(ItemStack[] iss) {
+		int count = 0;
+		for (ItemStack is : iss) {
+			if (is == null || is.getType() == Material.AIR) {
+				count++;
+			}
+		}
+		return count;
 	}
 }

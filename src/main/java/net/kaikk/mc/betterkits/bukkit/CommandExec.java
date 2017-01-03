@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,6 +22,7 @@ import net.kaikk.mc.betterkits.common.CommonUtils;
 public class CommandExec implements CommandExecutor {
 	private BetterKits instance;
 	private Set<Material> targetBlockFilter = new HashSet<Material>();
+	private Set<UUID> alertedPlayers = new HashSet<UUID>();
 	
 	public CommandExec(BetterKits instance) {
 		this.instance = instance;
@@ -181,6 +183,13 @@ public class CommandExec implements CommandExecutor {
 		Integer time = pd.getCooldownKits().get(lcName);
 		if (time != null && CommonUtils.epoch() - time < kit.getCooldown() && !player.hasPermission("betterkits.bypasscooldown.allkits") && !player.hasPermission("betterkits.bypasscooldown.kit."+lcName)) {
 			player.sendMessage(Messages.get("WaitKitCooldown", "remaining", CommonUtils.timeToString(kit.getCooldown() - (CommonUtils.epoch() - time)), "total", CommonUtils.timeToString(kit.getCooldown())));
+			return false;
+		}
+		
+		int freeSlots = Utils.freeSlots(player.getInventory().getContents());
+		int kitSlots = kit.getContents().length;
+		if (freeSlots < kitSlots && !this.alertedPlayers.add(player.getUniqueId())) {
+			player.sendMessage(Messages.get("KitItemsDropWarning", "kitname", kit.getName(), "kitslots", kitSlots+"", "freeslots", freeSlots+""));
 			return false;
 		}
 		

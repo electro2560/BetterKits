@@ -3,6 +3,7 @@ package net.kaikk.mc.betterkits.sponge;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -13,6 +14,9 @@ import org.spongepowered.api.command.args.ArgumentParseException;
 import org.spongepowered.api.command.args.CommandArgs;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.args.CommandElement;
+import org.spongepowered.api.item.ItemTypes;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.Tristate;
 
@@ -84,5 +88,27 @@ public class Utils {
 	public static String getCaller() {
 	  final StackTraceElement[] a = Thread.currentThread().getStackTrace();
 	  return a[a.length - 4].toString();
+	}
+
+	public static int freeSlots(Iterable<Inventory> slots) {
+		int count = 0;
+		for (Inventory i : slots) {
+			Optional<ItemStack> ois = i.peek();
+			if (!ois.isPresent() || ois.get().getItem() == ItemTypes.NONE) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static int usedSlots(Iterable<Inventory> slots) {
+		int count = 0;
+		for (Inventory i : slots) {
+			Optional<ItemStack> ois = i.peek();
+			if (ois.isPresent() && ois.get().getItem() != ItemTypes.NONE) {
+				count++;
+			}
+		}
+		return count;
 	}
 }
