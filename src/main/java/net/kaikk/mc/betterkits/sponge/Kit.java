@@ -41,6 +41,7 @@ public class Kit extends CommonKit {
 	}
 	
 	public Inventory getChestInventory() {
+		this.getBlockLocation().getExtent().loadChunk(this.getBlockLocation().getChunkPosition(), false);
 		return ((TileEntityCarrier) this.getBlockLocation().getTileEntity().get()).getInventory();
 	}
 	
@@ -59,8 +60,8 @@ public class Kit extends CommonKit {
 			InventoryTransactionResult result = player.getInventory().offer(iss.createStack());
 			for (ItemStackSnapshot is : result.getRejectedItems()) {
 				Item item = (Item) player.getLocation().getExtent().createEntity(EntityTypes.ITEM, player.getLocation().getPosition());
-				item.offer(Keys.REPRESENTED_ITEM, is);
-				player.getWorld().spawnEntity(item, Cause.of(NamedCause.source(player), NamedCause.source("BetterKits")));
+				item.offer(Keys.REPRESENTED_ITEM, is.copy());
+				player.getWorld().spawnEntity(item, Cause.of(NamedCause.source(player), NamedCause.owner("BetterKits")));
 			}
 		}
 		
