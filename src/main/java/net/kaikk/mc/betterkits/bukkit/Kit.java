@@ -23,29 +23,29 @@ public class Kit extends CommonKit implements InventoryHolder, ConfigurationSeri
 	private Inventory cachedInventory;
 	private ItemStack[] cachedContents;
 	private String cachedTitle;
-	
+
 	public Kit(String name, String world, int x, int y, int z, int cooldown, List<String> commands) {
 		super(name, world, x, y, z, cooldown, commands);
 	}
-	
+
 	public Kit(String name, Block block) {
 		super(name, block.getWorld().getName(), block.getLocation().getBlockX(), block.getLocation().getBlockY(), block.getLocation().getBlockZ(), 0, Collections.emptyList());
 	}
-	
+
 	public Block getBlock() {
 		return Bukkit.getWorld(this.world).getBlockAt(x, y, z);
 	}
-	
+
 	public Inventory getChestInventory() {
 		return ((InventoryHolder) this.getBlock().getState()).getInventory();
 	}
-	
+
 	public void give(Player player) {
 		Map<Integer,ItemStack> map = player.getInventory().addItem(this.getContents());
 		for (ItemStack is : map.values()) {
 			player.getWorld().dropItem(player.getLocation(), is);
 		}
-		
+
 		for (String cmd : this.getCommands()) {
 			try {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%name", player.getName()).replace("%uuid", player.getUniqueId().toString()));
@@ -54,11 +54,16 @@ public class Kit extends CommonKit implements InventoryHolder, ConfigurationSeri
 			}
 		}
 	}
-	
+
+	public void refill(InventoryHolder inventoryHolder) {
+		inventoryHolder.getInventory().clear();
+		inventoryHolder.getInventory().addItem(this.getContents());
+	}
+
 	public void openKitPreview(Player player) {
 		player.openInventory(this.getInventory());
 	}
-	
+
 	public ItemStack[] getContents() {
 		if (cachedContents == null) {
 			List<ItemStack> itemStacks = new ArrayList<ItemStack>(this.getChestInventory().getContents().length);
@@ -80,7 +85,7 @@ public class Kit extends CommonKit implements InventoryHolder, ConfigurationSeri
 		}
 		return cachedInventory;
 	}
-	
+
 	public String getCachedTitle() {
 		if (this.cachedTitle == null) {
 			this.cachedTitle = ChatColor.translateAlternateColorCodes('&', BetterKits.instance().config().kitTitleFormat.replace("%name", this.getName()));
@@ -90,11 +95,11 @@ public class Kit extends CommonKit implements InventoryHolder, ConfigurationSeri
 		}
 		return this.cachedTitle;
 	}
-	
+
 	public int shortestInventorySize() {
 		return this.getContents().length % 9 == 0 ? this.getContents().length : (((int)(this.getContents().length / 9)) * 9) + 9;
 	}
-	
+
 	public void clearCache() {
 		cachedInventory = null;
 		cachedContents = null;
@@ -113,7 +118,7 @@ public class Kit extends CommonKit implements InventoryHolder, ConfigurationSeri
 		map.put("commands", this.commands);
 		return map;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static Kit deserialize(Map<String, Object> map) {
 		return new Kit((String)map.get("name"), (String)map.get("world"), (int)map.get("x"), (int)map.get("y"), (int)map.get("z"), (int)map.get("cooldown"), (List<String>)map.get("commands"));
