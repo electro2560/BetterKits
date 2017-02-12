@@ -16,6 +16,7 @@ commands:
    kitedit:
    kitclearcache:
    kitreload:
+   kitrefill:
 
 permissions:
     betterkits.list:
