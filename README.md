@@ -52,3 +52,7 @@ Kits can be deleted with the "/kitdelete (kitname)" command.
 The config.yml/config.conf file contains a list of allowed chests. More chests can be added on the list by specifying the proper Material (Bukkit) or BlockType (Sponge) name.
 
 The plugin can be reloaded with /kitreload.
+
+You can also use the /kitrefill (kitname) (location) to replace a chest content with a kit. Notice that there isn't any limit for using the /kitrefill command, so it should be admin-only. It can be used as a faster alternative to vanilla /setblock and /clone commands for refilling chests on some custom map.
+
+
