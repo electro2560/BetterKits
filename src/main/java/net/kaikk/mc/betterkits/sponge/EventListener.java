@@ -1,7 +1,6 @@
 package net.kaikk.mc.betterkits.sponge;
 
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 public class EventListener {
@@ -9,13 +8,6 @@ public class EventListener {
 	
 	public EventListener(BetterKits instance) {
 		this.instance = instance;
-	}
-
-	@Listener
-	public void onInventoryClick(ClickInventoryEvent event) {
-		if (event.getCause().containsNamed("BetterKits")) {
-			event.setCancelled(true);
-		}
 	}
 	
 	@Listener

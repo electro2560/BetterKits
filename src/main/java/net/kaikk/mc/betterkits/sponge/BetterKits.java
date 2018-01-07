@@ -46,7 +46,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 
-@Plugin(id=PluginInfo.id, name = PluginInfo.name, version = PluginInfo.version, description = PluginInfo.description)
+@Plugin(id=PluginInfo.id, name = PluginInfo.name, version = PluginInfo.version, description = PluginInfo.description, authors = {PluginInfo.author})
 public class BetterKits {
 	private static BetterKits instance;
 	private Config config;
@@ -76,7 +76,7 @@ public class BetterKits {
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(PlayerData.class), new PlayerDataSerializer());
 
 		this.load();
-
+		
 		// Register listener
 		Sponge.getEventManager().registerListeners(this, new EventListener(this));
 

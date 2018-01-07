@@ -30,7 +30,7 @@ public class PreviewCommand implements CommandExecutor {
 			
 			kit.openKitPreview((Player) src);
 		} catch (Throwable e) {
-			src.sendMessage(Text.of(TextColors.RED, "This command is currently unsupported by the current SpongeAPI (missing Inventory API)."));
+			src.sendMessage(Text.of(TextColors.RED, "This command is currently unsupported by the current SpongeAPI."));
 			e.printStackTrace();
 		}
 		return CommandResult.success();

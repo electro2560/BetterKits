@@ -12,10 +12,13 @@ import org.spongepowered.api.entity.Item;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.NamedCause;
+import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
+import org.spongepowered.api.item.inventory.property.InventoryTitle;
 import org.spongepowered.api.item.inventory.transaction.InventoryTransactionResult;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
@@ -88,7 +91,15 @@ public class Kit extends CommonKit {
 	}
 
 	public void openKitPreview(Player player) {
-		player.openInventory(this.getChestInventory(), BetterKits.instance().getCause());
+		final Inventory previewInventory = Inventory.builder()
+				.from(this.getChestInventory())
+				.property(InventoryTitle.PROPERTY_NAME, InventoryTitle.of(Text.of(this.getName())))
+				.listener(ClickInventoryEvent.class, event -> {
+					event.setCancelled(true);
+				})
+				.build(BetterKits.instance());
+		
+		player.openInventory(previewInventory, BetterKits.instance().getCause());
 	}
 
 	public void clearCache() {

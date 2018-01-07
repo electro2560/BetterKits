@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.kaikk.mc</groupId>
 	<artifactId>BetterKits</artifactId>
-	<version>0.9.6</version>
+	<version>0.9.7</version>
 	<licenses>
 		<license>
 			<name>GPL v3 License</name>
@@ -37,6 +37,33 @@
 				<configuration>
 					<createChecksum>true</createChecksum>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>templating-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>filter-src</id>
+						<goals>
+							<goal>filter-sources</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<resources>
@@ -73,6 +100,8 @@
 	</dependencies>
 	<properties>
 		<package>net.kaikk.mc.betterkits</package>
+		<lowercaseid>betterkits</lowercaseid>
+		<description></description>
 		<developer>KaiNoMood</developer>
 	</properties>
 </project>
