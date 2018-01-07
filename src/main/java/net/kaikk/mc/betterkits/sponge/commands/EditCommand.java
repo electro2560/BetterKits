@@ -9,8 +9,6 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -41,7 +39,7 @@ public class EditCommand implements CommandExecutor {
 				src.sendMessage(Messages.get("OnlyPlayersCanRunThis"));
 				return CommandResult.empty();
 			}
-			((Player) src).openInventory(kit.getChestInventory(), Cause.of(NamedCause.source(BetterKits.instance()), NamedCause.source("BetterKits")));
+			((Player) src).openInventory(kit.getChestInventory());
 			src.sendMessage(Text.of(TextColors.RED, "Use /kitclearcache after you complete all the changes."));
 			return CommandResult.success();
 		}
@@ -94,7 +92,7 @@ public class EditCommand implements CommandExecutor {
 				src.sendMessage(Text.of(TextColors.RED, "Missing parameter"));
 				return CommandResult.empty();
 			}
-			kit.getCommands().remove(Integer.valueOf(param.get()));
+			kit.getCommands().remove(Integer.valueOf(param.get()).intValue());
 			try {
 				instance.saveData();
 				src.sendMessage(Text.of(TextColors.GREEN, "Command removed"));

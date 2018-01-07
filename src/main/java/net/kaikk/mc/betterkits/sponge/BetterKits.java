@@ -17,7 +17,6 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.game.GameReloadEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -242,9 +241,5 @@ public class BetterKits {
 
 	public PluginContainer getContainer() {
 		return container;
-	}
-
-	public Cause getCause() {
-		return Cause.source(container).build();
 	}
 }

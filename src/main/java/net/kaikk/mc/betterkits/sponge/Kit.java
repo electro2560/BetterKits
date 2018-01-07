@@ -10,8 +10,6 @@ import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.Item;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.Inventory;
@@ -56,7 +54,7 @@ public class Kit extends CommonKit {
 			for (ItemStackSnapshot is : result.getRejectedItems()) {
 				Item item = (Item) player.getLocation().getExtent().createEntity(EntityTypes.ITEM, player.getLocation().getPosition());
 				item.offer(Keys.REPRESENTED_ITEM, is.copy());
-				player.getWorld().spawnEntity(item, Cause.of(NamedCause.source(player), NamedCause.owner("BetterKits")));
+				player.getWorld().spawnEntity(item);
 			}
 		}
 
@@ -99,7 +97,7 @@ public class Kit extends CommonKit {
 				})
 				.build(BetterKits.instance());
 		
-		player.openInventory(previewInventory, BetterKits.instance().getCause());
+		player.openInventory(previewInventory);
 	}
 
 	public void clearCache() {

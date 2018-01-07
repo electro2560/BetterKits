@@ -359,7 +359,7 @@ public class CommandExec implements CommandExecutor {
 			if (args.length == 2) {
 				player.sendMessage(ChatColor.RED + "Missing parameter");
 			} else {
-				kit.getCommands().remove(Integer.valueOf(args[2]));
+				kit.getCommands().remove(Integer.valueOf(args[2]).intValue());
 				player.sendMessage(ChatColor.GREEN + "Command removed");
 				instance.saveData();
 			}

@@ -94,7 +94,7 @@ public class Utils {
 		int count = 0;
 		for (Inventory i : slots) {
 			Optional<ItemStack> ois = i.peek();
-			if (!ois.isPresent() || ois.get().getItem() == ItemTypes.NONE) {
+			if (!ois.isPresent() || ois.get().getType() == ItemTypes.NONE) {
 				count++;
 			}
 		}
@@ -105,7 +105,7 @@ public class Utils {
 		int count = 0;
 		for (Inventory i : slots) {
 			Optional<ItemStack> ois = i.peek();
-			if (ois.isPresent() && ois.get().getItem() != ItemTypes.NONE) {
+			if (ois.isPresent() && ois.get().getType() != ItemTypes.NONE) {
 				count++;
 			}
 		}

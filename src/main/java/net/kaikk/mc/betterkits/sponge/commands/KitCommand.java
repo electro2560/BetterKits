@@ -10,7 +10,7 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.item.inventory.entity.PlayerInventory;
+import org.spongepowered.api.item.inventory.entity.MainPlayerInventory;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -61,7 +61,8 @@ public class KitCommand implements CommandExecutor {
 			return CommandResult.empty();
 		}
 		
-		int freeSlots = Utils.freeSlots(((PlayerInventory) player.getInventory().query(PlayerInventory.class)).getMain().slots());
+		@SuppressWarnings("deprecation")
+		int freeSlots = Utils.freeSlots(((MainPlayerInventory) player.getInventory().query(MainPlayerInventory.class)).slots());
 		int kitSlots = Utils.usedSlots(kit.getChestInventory().slots());
 		if (freeSlots < kitSlots && !this.alertedPlayers.add(player.getUniqueId())) {
 			player.sendMessage(Messages.get("KitItemsDropWarning", "kitname", kit.getName(), "kitslots", kitSlots+"", "freeslots", freeSlots+""));
