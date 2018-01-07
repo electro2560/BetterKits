@@ -1,7 +1,7 @@
-###BetterKits
+### BetterKits
 BetterKits is a kit plugin compatible with Bukkit and Sponge servers.
 
-####Major features
+#### Major features
 - Supports item NBT data (for modded items like bags!)
 - Supports Cauldron servers
 - Kit preview
@@ -9,21 +9,21 @@ BetterKits is a kit plugin compatible with Bukkit and Sponge servers.
 - Per kit permission (users with this permission can get the kit without limits)
 - Command to give a limited amount of kits to players
 
-####Main commands
+#### Main commands
 - /kit (kitname) - get a kit
 - /kits - kit list
 - /kitcreate (kitname) - create a new kit for the target chest (just look at it directly)
 - /kitpreview (kitname) - shows a preview of the kit
 - /kitgive (player) (kitname) (amount) - gives the specified amount of the specified kit to the specified player
 
-####Links
+#### Links
 - [Latest release](https://github.com/KaiKikuchi/BetterKits/releases)
 - [Issue tracker](https://github.com/KaiKikuchi/BetterKits/issues)
 - [Source code](https://github.com/KaiKikuchi/BetterKits/)
 - [Personal page](http://mc.kaikk.net)
 - [Donate](http://mc.kaikk.net/#donate)
 
-####Basic installation and configuration
+#### Basic installation and configuration
 - Copy the jar file under "/plugins/" (Bukkit) or "/mods/plugins/" (Sponge).
 - Restart the server.
 - Make a protected area in your server that will contain all the kit chests (e.g. a private dimension or another protected area). This area must be inaccessible to players.
@@ -32,7 +32,7 @@ BetterKits is a kit plugin compatible with Bukkit and Sponge servers.
 - You can make more kits by placing a new chest and repeating the previous instructions.
 - WARNING: do not remove the chests you made for the kits! Those are used to read the kits items content! You also have to be sure they are inaccesible to players, or players may steal from them!
 
-#####Further details
+##### Further details
 Kits are stored into chests in the world so NBT data is preserved and kits can be modified easily.
 
 Kits can be created by placing a chest, filling the chest with items, then running the /kitcreate (kitname) command while looking at the chest. Do not remove the chests. Be sure to protect the chests from players.
