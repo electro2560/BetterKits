@@ -94,7 +94,7 @@ public class EditCommand implements CommandExecutor {
 				src.sendMessage(Text.of(TextColors.RED, "Missing parameter"));
 				return CommandResult.empty();
 			}
-			kit.getCommands().remove(Integer.valueOf(param.get()));
+			kit.getCommands().remove(Integer.valueOf(param.get()).intValue());
 			try {
 				instance.saveData();
 				src.sendMessage(Text.of(TextColors.GREEN, "Command removed"));
