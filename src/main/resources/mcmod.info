@@ -5,7 +5,8 @@
         "version": "${project.version}",
         "description": "${description}",
         "requiredMods": [
-            "spongeapi@5.1.0-SNAPSHOT"
+            "spongeapi",
+            "xsapi"
         ]
     }
 ]

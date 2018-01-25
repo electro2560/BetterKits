@@ -39,6 +39,7 @@ import net.kaikk.mc.betterkits.sponge.commands.KitRefillCommand;
 import net.kaikk.mc.betterkits.sponge.commands.KitsCommand;
 import net.kaikk.mc.betterkits.sponge.commands.PreviewCommand;
 import net.kaikk.mc.betterkits.sponge.commands.ReloadCommand;
+import net.kaikk.mc.xsapi.sponge.XSAPI;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
@@ -67,10 +68,13 @@ public class BetterKits {
 
 	@Inject
 	private PluginContainer container;
+	
+	public XSAPI xsapi; 
 
 	@Listener
 	public void onGameInitialization(GameInitializationEvent event) throws Exception {
 		instance = this;
+		this.xsapi = new XSAPI(container);
 
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Kit.class), new KitSerializer());
 		TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(PlayerData.class), new PlayerDataSerializer());
@@ -245,6 +249,6 @@ public class BetterKits {
 	}
 
 	public Cause getCause() {
-		return Cause.source(container).build();
+		return XSAPI.getCauseFor(container);
 	}
 }
